@@ -2,7 +2,7 @@ import React from "react";
 import Score from "./Score";
 import {
   Flex,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import Texttitle from "src/molcules/Texttitle";
 

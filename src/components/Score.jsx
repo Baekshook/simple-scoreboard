@@ -1,26 +1,53 @@
 import React from "react";
-import {Button, Input, Text, Center} from "@chakra-ui/react";
-import { useState} from "react";
+import {
+  Button,
+  Input,
+  Text,
+  Center,
+  Alert,
+  AlertIcon,
+  Stack,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function Score() {
-    const [inputValue, setInputValue] = useState("");
-    const [result, setResult] = useState(0);
-    
-    const handleInputChange = (event) => {
-      setInputValue(event.target.value);
-    };
+  const [inputValue, setInputValue] = useState("");
+  const [result, setResult] = useState(0);
 
-    const handleAdd = () => {
-      setResult(result + parseInt(inputValue));
-      // parseInt 함수는 첫 번째 인자를 문자열로 변환하고, 그 값을 파싱하여 정수나 NaN을 반환합니다.
-      setInputValue("");
-    };
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
-    const handleMinus = () => {
-      setResult(result - parseInt(inputValue));
-      setInputValue("");
-    };
-    
+  const parseIntPlus = result + parseInt(inputValue) || result;
+  const parseIntMinus = result - parseInt(inputValue) || result;
+
+  const alertWarning = (
+    <Stack spacing={3}>
+      <Alert status="warning" variant="left-accent">
+        <AlertIcon />
+        숫자를 입력하세요!
+      </Alert>
+    </Stack>
+  );
+
+  const handleAdd = () => {
+    if (inputValue === "") {
+      alert("숫자를 입력하세요!");
+      return;
+    }
+    setResult(parseIntPlus);
+    // parseInt 함수는 첫 번째 인자를 문자열로 변환하고, 그 값을 파싱하여 정수나 NaN을 반환합니다.
+    setInputValue("");
+  };
+
+  const handleMinus = () => {
+    if (inputValue === "") {
+      alert("숫자를 입력하세요!");
+      return;
+    }
+    setResult(parseIntMinus);
+    setInputValue("");
+  };
 
   return (
     <>
